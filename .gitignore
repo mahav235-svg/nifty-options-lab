@@ -1,0 +1,15 @@
+.venv/
+.env
+__pycache__/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+
+# data layers are rebuilt with `optlab data fetch && optlab data build`
+/data/
+/logs/
+# trade-level outputs are large; summaries and RESULTS.md are committed
+reports/trades/
+/journal/

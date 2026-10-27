@@ -1,0 +1,30 @@
+# Deployed strategy for `optlab live run`. Research basis: reports/RESULTS.md (round 2).
+#
+# RBI pre-announcement iron fly: sell the ATM straddle and buy wings 3 expected moves away on the
+# nearest expiry after the MPC decision; open at the close two sessions before the decision day,
+# close at the close of the session before it. Never held through the announcement.
+#
+# Status: candidate, not a proven edge (passes 5 of 6 pre-registered tests; fails the deflated
+# Sharpe test because there are only about 6 RBI decisions a year). Run in paper mode first.
+
+enabled: false          # set to true only after reviewing RESULTS.md and a paper-trading period
+strategy: rbi_event_fly
+symbol: NIFTY
+params:
+  entry_offset: 2       # sessions before the decision day
+  exit_offset: 1
+  wing_em: 3.0
+  lots: 1
+
+capital: 150000         # account size used for the risk check
+max_loss_fraction: 0.20 # refuse a trade whose maximum loss exceeds this share of capital
+
+execution:              # limit orders worked from mid towards the touch
+  steps: 4
+  wait_seconds: 8
+  max_spread_ticks: 40
+
+# NSE trading holidays (weekdays) in YYYY-MM-DD. The runner also asks the broker for the holiday
+# calendar; entries here are added to whatever the broker returns. Fill from the NSE holiday
+# circular each December.
+holidays: []

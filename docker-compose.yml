@@ -1,0 +1,9 @@
+services:
+  runner:
+    build: .
+    env_file: [.env]
+    volumes:
+      - ./data:/app/data
+      - ./journal:/app/journal
+      - ~/.optlab:/home/app/.optlab
+    command: ["live", "run", "--mode", "paper"]
